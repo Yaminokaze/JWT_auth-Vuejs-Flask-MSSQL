@@ -52,7 +52,7 @@ export default {
         password: this.credentials.password
       }
 
-      auth.login(this, credentials, 'secretquote')
+      auth.login(this, credentials, '/')
 
     }
   }
