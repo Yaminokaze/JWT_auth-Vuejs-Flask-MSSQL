@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="col-sm-6 col-sm-offset-3">
+    <h1>Get a Free Chuck Norris Quote!</h1>
+    <button class="btn btn-primary" v-on:click="getQuote()">Get a Quote</button>
+    <div class="quote-area" v-if="quote">
+      <h2><blockquote>{{ quote }}</blockquote></h2>      
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import auth from "@/auth/index";
 
 export default {
-  name: "home",
-  components: {
-    HelloWorld
+  data() {
+    return {
+      quote: ""
+    };
+  },
+
+  methods: {
+    getQuote() {
+      this.$http
+        .get('http://localhost:/5000/home', (data) => {
+          this.quote = data;
+        }, { 
+          headers: auth.getAuthHeader()
+        })
+      //  .error(err => {console.log(err)}
+      }
   }
-};
+
+}
 </script>

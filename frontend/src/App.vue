@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
+  <div class="d-flex align-items-center justify-content-center">
     <router-view />
+    <button class="btn btn-danger" @click="logout()" v-if="!user" >logout</button>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-#nav {
-  padding: 30px;
-}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+<script>
+import auth from './auth'
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+export default {
+  data() {
+    return {
+      user: auth.user
+    }
+  },
+
+  methods: {
+
+    logout() {
+      auth.logout()
+    }
+  }
 }
-</style>
+</script>

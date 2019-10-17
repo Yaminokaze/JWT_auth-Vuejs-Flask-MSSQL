@@ -1,68 +1,61 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center">
-          <v-col cols="12" sm="8" md="4">
-            <v-card class="elevation-12">
-              <v-toolbar color="primary" dark flat>
-                <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer></v-spacer>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-btn :href="source" icon large target="_blank" v-on="on">
-                      <v-icon>mdi-code-tags</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Source</span>
-                </v-tooltip>
-                <v-tooltip right>
-                  <template v-slot:activator="{ on }">
-                    <v-btn
-                      icon
-                      large
-                      href="https://codepen.io/johnjleider/pen/pMvGQO"
-                      target="_blank"
-                      v-on="on"
-                    >
-                      <v-icon>mdi-codepen</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Codepen</span>
-                </v-tooltip>
-              </v-toolbar>
-              <v-card-text>
-                <v-form>
-                  <v-text-field label="Login" name="login" prepend-icon="person" type="text"></v-text-field>
-
-                  <v-text-field
-                    id="password"
-                    label="Password"
-                    name="password"
-                    prepend-icon="lock"
-                    type="password"
-                  ></v-text-field>
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="primary">Login</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
-  </v-app>
+  <div class="col-sm-4 col-sm-offset-4">
+    <h2>Log In</h2>
+    <p>Log in to your account to get some great quotes.</p>
+    <div class="alert alert-danger" v-if="error">
+      <p>{{ error }}</p>
+    </div>
+    <div class="form-group">
+      <input 
+        type="text" 
+        class="form-control"
+        placeholder="Enter your username"
+        v-model="credentials.username"
+      >
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter your password"
+        v-model="credentials.password"
+      >
+    </div>
+    <div class="form-group">
+           <router-link to="/signup">you don't have an account? </router-link> 
+    </div>
+    <button class="btn btn-primary" @click="submit()">Access</button>
+  </div>
 </template>
 
 <script>
+import auth from '../auth/index'
+
 export default {
-  props: {
-    source: String
+
+  data() {
+    return {
+      credentials: {
+        username: '',
+        password: ''
+      },
+      error: ''
+    }
   },
-  data: () => ({
-    drawer: null
-  })
-};
+
+  methods: {
+
+    submit() {
+
+      var credentials = {
+        username: this.credentials.username,
+        password: this.credentials.password
+      }
+
+      auth.login(this, credentials, 'secretquote')
+
+    }
+  }
+  
+}
 </script>

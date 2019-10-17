@@ -8,13 +8,6 @@ api = Api(app)
 
 import urllib
 import pyodbc
-#params = urllib.parse.quote_plus("DRIVER={SQL Server Native Client 10.0};SERVER=dagger;DATABASE=test;UID=user;PWD=password")
-#params = urllib.parse.quote_plus("driver='{SQL Server}';Server=localhost;database=Automalogica-challenge;Trusted_Connection=True;")
-#driver = 'ODBC+DRIVER+17+for+SQL+Server'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mssql+pyodbc://YAMI/Automalogica-challenge'
-#"mssql+pyodbc://%s:%s@%s/%s?driver=%s" % ("YAMI", "", "localhost", "Automalogica-challenge", driver )
-#"mssql+pyodbc:///?odbc_connect=%s" % params
-
 params = urllib.parse.quote_plus('DRIVER={SQL Server};SERVER=YAMI;DATABASE=Automalogica-challenge;Trusted_Connection=yes;')
 app.config['SQLALCHEMY_DATABASE_URI'] = "mssql+pyodbc:///?odbc_connect=%s" % params
 
