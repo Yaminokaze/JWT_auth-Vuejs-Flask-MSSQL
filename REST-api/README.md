@@ -16,6 +16,7 @@ Using: `Flask (python framework)` + `MSSQL (SQL server)`.
 ## 1. Installing SQL Server
 
 Install SQL Server Developer edition ([Link](https://www.microsoft.com/en-in/sql-server/sql-server-downloads))
+change the name of the server in run.py
 
 ## 2. Create the virtual environment 
 ```bash
