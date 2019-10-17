@@ -28,11 +28,11 @@ const router = new VueRouter({
   mode: "history",
   routes
 });
-/*
+
 router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/signup"];
   const authRequired = !publicPages.includes(to.path);
-  const loggedIn = false; //localStorage.getItem('user');
+  const loggedIn = localStorage.getItem("acces_token");
 
   if (authRequired && !loggedIn) {
     return next("/login");
@@ -40,5 +40,5 @@ router.beforeEach((to, from, next) => {
     return next("/");
   } else next();
 });
-*/
+
 export default router;

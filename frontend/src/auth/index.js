@@ -10,44 +10,48 @@ export default {
   },
 
   login(context, creds, redirect) {
-    context.$http
-      .post(LOGIN_URL, creds, data => {
-        localStorage.setItem("id_token", data.id_token);
+    context.$http.post(LOGIN_URL, creds).then(
+      data => {
+        localStorage.setItem("acces_token", data.acces_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
 
         this.user.authenticated = true;
 
         if (redirect) {
           router.go(redirect);
         }
-      })
-      .error(err => {
-        context.error = err;
-      });
+      },
+      error => {
+        context.error = error;
+      }
+    );
   },
 
   signup(context, creds, redirect) {
-    context.$http
-      .post(SIGNUP_URL, creds, data => {
-        localStorage.setItem("id_token", data.access_token);
-
+    context.$http.post(SIGNUP_URL, creds).then(
+      response => {
+        localStorage.setItem("acces_token", response.access_token);
+        localStorage.setItem("refresh_token", response.refresh_token);
         this.user.authenticated = true;
 
         if (redirect) {
           router.go(redirect);
         }
-      })
-      .error(err => {
-        context.error = err;
-      });
+      },
+      error => {
+        context.error = error.message;
+      }
+    );
   },
 
   logout() {
-    localStorage.removeItem("id_token");
+    localStorage.removeItem("acces_token");
+    localStorage.removeItem("refresh_token");
     this.user.authenticated = false;
   },
 
   checkAuth() {
-    var jwt = localStorage.getItem("id_token");
+    var jwt = localStorage.getItem("acces_token");
     if (jwt) {
       this.user.authenticated = true;
     } else {

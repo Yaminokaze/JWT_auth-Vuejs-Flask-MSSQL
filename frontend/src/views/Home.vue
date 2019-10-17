@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>Welcome</h1>
+      <div class="alert alert-danger" v-if="error">
+      <p>{{ error }}</p>
+      </div>
     <h2>Username: {{credentials.username}}</h2>
     <h2>Email: {{credentials.email}}</h2>
     <h2>Country: {{credentials.country}}</h2>
@@ -17,7 +20,8 @@ export default {
         email: "",
         country: "",
         birthdayDate: ""
-      }
+      },
+      error:""
     };
   },
   methods: {
@@ -25,12 +29,12 @@ export default {
   
 created: function () {
       this.$http.get("http://localhost:5000/home").then(
-        function(response) {
+        response => {
           this.credentials = response;
-        }/*,
-        function(error) {
-          console.log(error);
-        }*/
+        },
+      error => {
+        this.error = error.message;
+      }
       );
     }
 }};

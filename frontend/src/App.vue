@@ -4,7 +4,7 @@
     <router-view />
   </div>
     <div class="d-flex align-items-center justify-content-center">
-    <button class="btn btn-danger" @click="logout()" v-if="user" >logout</button>
+    <button class="btn btn-danger" @click="logout()" v-if="!user" >logout</button>
   </div>
 </div>
 </template>
