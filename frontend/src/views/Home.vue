@@ -8,7 +8,6 @@
     <h2>Email: {{ email }}</h2>
     <h2>Country: {{ country }}</h2>
     <h2>Birthday: {{ birthdayDate }}</h2>
-    <button class="btn btn-danger" @click="submit()">logout</button>
   </div>
 </template>
 
@@ -17,7 +16,7 @@ export default {
   data() {
     return {
 
-        username: "a",
+        username: "",
         email: "",
         country: "",
         birthdayDate: "",
@@ -28,13 +27,14 @@ export default {
 },
   
 mounted: function() {
-      console.log("test");  // eslint-disable-line
       this.$http.get("http://localhost:5000/home").then(
         response => {
           this.username = response.username;
           this.email = response.email;
           this.country = response.country;
           this.birthdayDate = response.birthdayDate
+                console.log("test");  // eslint-disable-line
+
         },
       error => {
         this.error = error.message;

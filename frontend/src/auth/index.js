@@ -22,7 +22,7 @@ export default {
         }
       },
       error => {
-        context.error = error;
+        context.error = error.message;
       }
     );
   },
