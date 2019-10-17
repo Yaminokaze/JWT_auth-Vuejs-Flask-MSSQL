@@ -1,5 +1,5 @@
 # frontend
-
+> not fully working
 ## Project setup
 ```
 npm install
