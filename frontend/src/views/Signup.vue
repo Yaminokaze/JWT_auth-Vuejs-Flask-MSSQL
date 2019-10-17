@@ -64,11 +64,12 @@ export default {
 
   methods: {
     submit() {
+      let date = new Date(this.credentials.birthdayDate)
       var credentials = {
         username: this.credentials.username,
         email: this.credentials.email,
         country: this.credentials.country,
-        birthdayDate: this.credentials.birthdayDate,
+        birthdayDate: date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear(),
         password: this.credentials.password
       };
 

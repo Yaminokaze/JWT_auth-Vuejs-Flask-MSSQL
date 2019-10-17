@@ -12,7 +12,7 @@ export default {
   login(context, creds, redirect) {
     context.$http.post(LOGIN_URL, creds).then(
       data => {
-        localStorage.setItem("acces_token", data.acces_token);
+        localStorage.setItem("access_token", data.acces_token);
         localStorage.setItem("refresh_token", data.refresh_token);
 
         this.user.authenticated = true;
@@ -30,7 +30,7 @@ export default {
   signup(context, creds, redirect) {
     context.$http.post(SIGNUP_URL, creds).then(
       response => {
-        localStorage.setItem("acces_token", response.access_token);
+        localStorage.setItem("access_token", response.access_token);
         localStorage.setItem("refresh_token", response.refresh_token);
         this.user.authenticated = true;
 
@@ -45,13 +45,14 @@ export default {
   },
 
   logout() {
-    localStorage.removeItem("acces_token");
+    localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     this.user.authenticated = false;
+    router.go("/");
   },
 
   checkAuth() {
-    var jwt = localStorage.getItem("acces_token");
+    var jwt = localStorage.getItem("access_token");
     if (jwt) {
       this.user.authenticated = true;
     } else {
@@ -61,7 +62,7 @@ export default {
 
   getAuthHeader() {
     return {
-      Authorization: "Bearer " + localStorage.getItem("id_token")
+      Authorization: "Bearer " + localStorage.getItem("access_token")
     };
   }
 };
