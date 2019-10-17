@@ -1,16 +1,14 @@
 <template>
-  <div class="col-sm-6 col-sm-offset-3">
-    <h1>Welcome {{credentials.username}}!</h1>
-     <h2> Email: {{credentials.email}} </h2>
-     <h2> Country: {{credentials.country}} </h2>
-     <h2> birthdayDate: {{credentials.birthdayDate}} </h2>
-    </div>
+  <div>
+    <h1>Welcome</h1>
+    <h2>Username: {{credentials.username}}</h2>
+    <h2>Email: {{credentials.email}}</h2>
+    <h2>Country: {{credentials.country}}</h2>
+    <h2>Birthday: {{credentials.birthdayDate}}</h2>
   </div>
 </template>
 
 <script>
-import auth from "@/auth/index";
-
 export default {
   data() {
     return {
@@ -18,22 +16,22 @@ export default {
         username: "",
         email: "",
         country: "",
-        birthdayDate: "",
-      },
+        birthdayDate: ""
+      }
     };
   },
-
   methods: {
-    mounted() {
-      this.$http
-        .get('http://localhost:/5000/home', (data) => {
-          this.credentials = data;
-        }, { 
-          headers: auth.getAuthHeader()
-        })
-      //  .error(err => {console.log(err)}
-      }
-  }
 
-}
+  
+created: function () {
+      this.$http.get("http://localhost:5000/home").then(
+        function(response) {
+          this.credentials = response;
+        }/*,
+        function(error) {
+          console.log(error);
+        }*/
+      );
+    }
+}};
 </script>

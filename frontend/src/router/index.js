@@ -20,14 +20,15 @@ const routes = [
     path: "/signup",
     name: "signup",
     component: Signup
-  }
+  },
+  { path: "*", redirect: "/" }
 ];
 
 const router = new VueRouter({
   mode: "history",
   routes
 });
-
+/*
 router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/signup"];
   const authRequired = !publicPages.includes(to.path);
@@ -39,5 +40,5 @@ router.beforeEach((to, from, next) => {
     return next("/");
   } else next();
 });
-
+*/
 export default router;
